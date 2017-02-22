@@ -39,15 +39,4 @@
     - role: "discourse"
       tags: ["discourse"]
 
-    - role: "nginx-discourse"
-      tags: ["nginx-discourse"]
-
-    - role: "opendkim"
-      tags: ["opendkim"]
-      when: discourse_smtp_address == 'localhost' and dkim_enabled
-
-    - role: "postfix"
-      tags: ["postfix"]
-      when: discourse_smtp_address == 'localhost'
-
-
+    - role: "caddy"
