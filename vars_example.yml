@@ -27,6 +27,10 @@ postgres_password:            "12345678"
 #discourse_smtp_auth:          "plain"
 #discourse_smtp_start_tls:     "true"
 
+# Email for Let's Encrypt
+caddy_email: "your.email@example.com"
+caddy_features: "expires"
+
 #-----------------------#
 # Further configuration #
 #-----------------------#

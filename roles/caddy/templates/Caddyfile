@@ -1,0 +1,27 @@
+{{discourse_hostname}}:80 {
+    redir https://{{discourse_hostname}}{uri}
+}
+
+{{discourse_hostname}} {
+    log /var/log/caddy/access.log
+    errors /var/log/caddy/errors.log
+    root /var/www/discourse/public
+
+    # Prevent direct download of backups.
+    internal /backups
+    internal /downloads
+
+    proxy / localhost:3000 {
+        except /assets /stylesheet-cache /optimized /_optimized
+        header_upstream Host discourse.szlosek.net
+        header_upstream X-Real-IP {remote}
+        header_upstream X-Forwarded-For {remote}
+        header_upstream X-Forwarded-Proto {scheme}
+    }
+
+    status 204 /favicon.ico
+
+    expires {
+        match assets\.*\.(eot|ttf|woff|woff2|ico)$ 1y
+    }
+}

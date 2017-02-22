@@ -1,12 +1,6 @@
 ---
 # defaults file for caddy-ansible
-caddy_user: www-data
-caddy_home: /home/caddy
+caddy_user: discourse
+caddy_home: /home/discourse
 caddy_features: git
 caddy_update: yes
-caddy_config: |
-  localhost:2020
-  gzip
-  # tls email@example.com
-  root /var/www
-  git github.com/antoiner77/caddy-ansible

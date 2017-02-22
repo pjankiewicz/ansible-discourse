@@ -1,5 +1,14 @@
 ---
-- include: packages-{{ ansible_pkg_mgr }}.yml
+
+- include: "packages-yum.yml"
+  when: >
+    ansible_os_family == "RedHat"
+    and ansible_distribution_major_version == "22"
+
+- include: "packages-apt.yml"
+  when: >
+    ansible_os_family == "Debian"
+    and ansible_distribution_major_version == "8"
 
 - name: Create Caddy user
   user: name={{ caddy_user }} system=yes createhome=yes home={{ caddy_home }}
@@ -38,11 +47,10 @@
   with_items:
     - /etc/caddy
     - /etc/ssl/caddy
-    - /var/www
     - /var/log/caddy
 
-- name: Create Caddyfile
-  copy: content="{{caddy_config}}" dest=/etc/caddy/Caddyfile owner={{ caddy_user }}
+- name: Copy Caddyfile
+  template: src=Caddyfile dest=/etc/caddy/Caddyfile owner={{ caddy_user }}
   notify: Restart Caddy
 
 - name: Check if systemd is running
