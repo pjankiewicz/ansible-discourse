@@ -11,6 +11,12 @@
     internal /backups
     internal /downloads
 
+    status 204 /favicon.ico
+
+    expires {
+        match assets\.*\.(eot|ttf|woff|woff2|ico)$ 1y
+    }
+
     proxy / localhost:3000 {
         except /assets /stylesheet-cache /optimized /_optimized /images
         header_upstream Host discourse.szlosek.net
@@ -20,9 +26,4 @@
         keepalive 60
     }
 
-    status 204 /favicon.ico
-
-    expires {
-        match assets\.*\.(eot|ttf|woff|woff2|ico)$ 1y
-    }
 }
