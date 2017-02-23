@@ -12,7 +12,7 @@
     internal /downloads
 
     proxy / localhost:3000 {
-        except /assets /stylesheet-cache /optimized /_optimized
+        except /assets /stylesheet-cache /optimized /_optimized /images
         header_upstream Host discourse.szlosek.net
         header_upstream X-Real-IP {remote}
         header_upstream X-Forwarded-For {remote}
