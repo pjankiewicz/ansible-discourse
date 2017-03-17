@@ -1,0 +1,14 @@
+---
+
+- name: Install packages
+  apt: name={{ item }} state=present
+  with_items:
+    - iptables-persistent
+
+- name: iptables v4 rules
+  template: src=iptables/rules.v4 dest=/etc/iptables/rules.v4 owner=root group=root mode=0644
+#  notify:
+#    - reload iptables
+
+- name: iptables v6 rules
+  template: src=iptables/rules.v6 dest=/etc/iptables/rules.v6 owner=root group=root mode=0644
