@@ -1,5 +1,5 @@
 {{discourse_hostname}}:80 {
-    redir https://{{discourse_hostname}}{uri}
+    redir https://{host}{uri}
 }
 
 {{discourse_hostname}} {
@@ -19,7 +19,7 @@
 
     proxy / localhost:3000 {
         except /assets /stylesheet-cache /optimized /_optimized /images
-        header_upstream Host discourse.szlosek.net
+        header_upstream Host {host}
         header_upstream X-Real-IP {remote}
         header_upstream X-Forwarded-For {remote}
         header_upstream X-Forwarded-Proto {scheme}
